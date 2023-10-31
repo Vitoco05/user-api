@@ -31,13 +31,13 @@ const updateUser = catchError(async(req, res) => {
     { first_name, last_name, email, password, birthday },
     { where: {id}, returning: true}
   );
-  return res.status(201).json(user);
+  return res.status(201).json(user[1][0]);
 });
 
 const deleteUser = catchError(async(req, res) => {
   const { id } = req.params;
   const user = await User.destroy({ where: {id} });
-  return res.json(user[1][0]);
+  return res.json(user);
 });
 
 module.exports = {
